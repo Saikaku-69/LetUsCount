@@ -12,10 +12,14 @@ struct GraphView: View {
     
     var body: some View {
         HStack {
-            ForEach(phoneDataManager.phoneModel) { item in
-                Rectangle()
-                    .fill(.red)
-                    .frame(width: 50,height:CGFloat(Int(item.count)) * 10)
+            ForEach(phoneDataManager.phoneModels) { item in
+                VStack {
+                    Spacer()
+                    Rectangle()
+                        .fill(.green)
+                        .frame(width: 25,height:CGFloat(Int(item.count)) * 10)
+                }
+                .frame(height:500)
             }
         }
     }

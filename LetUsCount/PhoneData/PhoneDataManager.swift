@@ -17,28 +17,41 @@ struct PhoneModel: Identifiable,Hashable {
 }
 
 class PhoneDataManager:ObservableObject {
-    @Published var phoneModel: [PhoneModel]
+    @Published var phoneModels: [PhoneModel] = []
     
     init() {
-        self.phoneModel = [
-            PhoneModel(name: "iPhoneXR"),
-            PhoneModel(name: "iPhone11"),
-            PhoneModel(name: "iPhone12"),
-            PhoneModel(name: "iPhone13")
+        loadData()
+    }
+    
+    func loadData() {
+        phoneModels = [
+            PhoneModel(name: "iPhone XR", count: UserDefaults.standard.integer(forKey: "iPhone XR_count")),
+            PhoneModel(name: "iPhone 11", count: UserDefaults.standard.integer(forKey: "iPhone 11_count")),
+            PhoneModel(name: "iPhone 12", count: UserDefaults.standard.integer(forKey: "iPhone 12_count")),
+            PhoneModel(name: "iPhone 13", count: UserDefaults.standard.integer(forKey: "iPhone 13_count"))
         ]
     }
     
+    func saveData() {
+        for phone in phoneModels {
+            UserDefaults.standard.set(phone.count, forKey: "\(phone.name)_count")
+        }
+    }
+    
+    
     func phoneIncrement(for item: PhoneModel) {
         //where闭包为了找到匹配的元素
-        if let index = phoneModel.firstIndex(where: { $0.id == item.id }) {
-            phoneModel[index].count += 1
+        if let index = phoneModels.firstIndex(where: { $0.id == item.id }) {
+            phoneModels[index].count += 1
+            saveData()
         }
     }
     
     func phoneDecrement(for item: PhoneModel) {
-        if let index = phoneModel.firstIndex(where: { $0.id == item.id}) {
-            if phoneModel[index].count > 0 {
-                phoneModel[index].count -= 1
+        if let index = phoneModels.firstIndex(where: { $0.id == item.id}) {
+            if phoneModels[index].count > 0 {
+                phoneModels[index].count -= 1
+                saveData()
             }
         }
     }
