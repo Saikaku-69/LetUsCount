@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct GrafView: View {
+struct GraphView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
     
     var body: some View {
@@ -22,6 +22,6 @@ struct GrafView: View {
 }
 
 #Preview {
-    GrafView()
+    GraphView()
         .environmentObject(PhoneDataManager())
 }

@@ -14,7 +14,7 @@ struct MainContentView: View {
                 .tabItem {
                     Image(systemName: "tray.full.fill")
                 }
-            GrafView()
+            GraphView()
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }

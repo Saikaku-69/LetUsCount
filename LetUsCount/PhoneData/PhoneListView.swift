@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
-    
+    @AppStorage("count") var newCount:Int = 0
     var body: some View {
         HStack {
             List {
@@ -19,6 +19,7 @@ struct PhoneListView: View {
                         Spacer()
                         
                         Button(action: {
+                            
                             phoneDataManager.phoneIncrement(for: item)
                         }) {
                             Image(systemName: "plus.circle.fill")
