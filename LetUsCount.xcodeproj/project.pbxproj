@@ -16,6 +16,8 @@
 		7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3C2CE483D9006FF92F /* AnotherView.swift */; };
 		7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */; };
 		7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* PhoneListView.swift */; };
+		7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C442CE49AD8006FF92F /* MainContentView.swift */; };
+		7FD24C482CE49F86006FF92F /* GrafView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C472CE49F86006FF92F /* GrafView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		7FD24C3C2CE483D9006FF92F /* AnotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherView.swift; sourceTree = "<group>"; };
 		7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneDataManager.swift; sourceTree = "<group>"; };
 		7FD24C412CE48A46006FF92F /* PhoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListView.swift; sourceTree = "<group>"; };
+		7FD24C442CE49AD8006FF92F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		7FD24C472CE49F86006FF92F /* GrafView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrafView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,7 @@
 				7FA00A2F2CE44D71000F695E /* ContentView.swift */,
 				7FD24C372CE480B8006FF92F /* DataShareTest */,
 				7FD24C3E2CE48908006FF92F /* PhoneData */,
+				7FD24C432CE49A99006FF92F /* UI */,
 				7FA00A312CE44D75000F695E /* Assets.xcassets */,
 				7FA00A332CE44D75000F695E /* Preview Content */,
 			);
@@ -94,8 +99,25 @@
 			children = (
 				7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */,
 				7FD24C412CE48A46006FF92F /* PhoneListView.swift */,
+				7FD24C462CE49F6B006FF92F /* Graf */,
 			);
 			path = PhoneData;
+			sourceTree = "<group>";
+		};
+		7FD24C432CE49A99006FF92F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				7FD24C442CE49AD8006FF92F /* MainContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		7FD24C462CE49F6B006FF92F /* Graf */ = {
+			isa = PBXGroup;
+			children = (
+				7FD24C472CE49F86006FF92F /* GrafView.swift */,
+			);
+			path = Graf;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +193,8 @@
 				7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */,
 				7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */,
 				7FA00A302CE44D71000F695E /* ContentView.swift in Sources */,
+				7FD24C482CE49F86006FF92F /* GrafView.swift in Sources */,
+				7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */,
 				7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */,
 				7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */,
 				7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */,

@@ -8,34 +8,29 @@
 import SwiftUI
 
 struct PhoneListView: View {
-    @StateObject var phoneDataManager = PhoneDataManager()
-    
-    let phoneList = ["iPhoneX",
-                     "iPhone11",
-                     "iPhone12",
-                     "iPhone13"]
+    @EnvironmentObject var phoneDataManager: PhoneDataManager
     
     var body: some View {
         HStack {
             List {
-                ForEach (phoneList,id: \.self) { item in
-                    
+                ForEach (phoneDataManager.phoneModel) { item in
                     HStack {
-                        Text(item)
+                        Text(item.name)
                         Spacer()
                         
                         Button(action: {
-                            phoneDataManager.phoneIncrement()
+                            phoneDataManager.phoneIncrement(for: item)
                         }) {
                             Image(systemName: "plus.circle.fill")
                                 .foregroundColor(.blue)
                         }
                         .buttonStyle(PlainButtonStyle()) //禁止选择整行
                         
-                        Text("\(phoneDataManager.phoneCount)")
+                        Text("\(item.count)")
                             .frame(width: 50)
+                        
                         Button(action: {
-                            phoneDataManager.phoneDecrement()
+                            phoneDataManager.phoneDecrement(for: item)
                         }) {
                             Image(systemName: "minus.circle.fill")
                                 .foregroundColor(.red)
@@ -50,4 +45,5 @@ struct PhoneListView: View {
 
 #Preview {
     PhoneListView()
+        .environmentObject(PhoneDataManager())
 }
