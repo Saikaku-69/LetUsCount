@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct LetUsCountApp: App {
+    @StateObject private var phoneDataManager = PhoneDataManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainContentView()
+                .environmentObject(phoneDataManager)
         }
     }
 }
