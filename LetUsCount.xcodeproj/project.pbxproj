@@ -14,6 +14,8 @@
 		7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C382CE480CF006FF92F /* SampleData.swift */; };
 		7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3A2CE48139006FF92F /* DataTestView.swift */; };
 		7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3C2CE483D9006FF92F /* AnotherView.swift */; };
+		7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */; };
+		7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* PhoneListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		7FD24C382CE480CF006FF92F /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7FD24C3A2CE48139006FF92F /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		7FD24C3C2CE483D9006FF92F /* AnotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherView.swift; sourceTree = "<group>"; };
+		7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneDataManager.swift; sourceTree = "<group>"; };
+		7FD24C412CE48A46006FF92F /* PhoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 				7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */,
 				7FA00A2F2CE44D71000F695E /* ContentView.swift */,
 				7FD24C372CE480B8006FF92F /* DataShareTest */,
+				7FD24C3E2CE48908006FF92F /* PhoneData */,
 				7FA00A312CE44D75000F695E /* Assets.xcassets */,
 				7FA00A332CE44D75000F695E /* Preview Content */,
 			);
@@ -82,6 +87,15 @@
 				7FD24C3C2CE483D9006FF92F /* AnotherView.swift */,
 			);
 			path = DataShareTest;
+			sourceTree = "<group>";
+		};
+		7FD24C3E2CE48908006FF92F /* PhoneData */ = {
+			isa = PBXGroup;
+			children = (
+				7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */,
+				7FD24C412CE48A46006FF92F /* PhoneListView.swift */,
+			);
+			path = PhoneData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +168,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */,
+				7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */,
 				7FA00A302CE44D71000F695E /* ContentView.swift in Sources */,
 				7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */,
 				7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */,

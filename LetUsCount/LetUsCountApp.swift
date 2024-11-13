@@ -11,7 +11,7 @@ import SwiftUI
 struct LetUsCountApp: App {
     var body: some Scene {
         WindowGroup {
-            DataTestView()
+            PhoneListView()
         }
     }
 }
