@@ -18,6 +18,8 @@
 		7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* PhoneListView.swift */; };
 		7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C442CE49AD8006FF92F /* MainContentView.swift */; };
 		7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C472CE49F86006FF92F /* GraphView.swift */; };
+		7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */; };
+		7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		7FD24C412CE48A46006FF92F /* PhoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListView.swift; sourceTree = "<group>"; };
 		7FD24C442CE49AD8006FF92F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		7FD24C472CE49F86006FF92F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipTestView.swift; sourceTree = "<group>"; };
+		7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEditManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +94,7 @@
 				7FD24C382CE480CF006FF92F /* SampleData.swift */,
 				7FD24C3A2CE48139006FF92F /* DataTestView.swift */,
 				7FD24C3C2CE483D9006FF92F /* AnotherView.swift */,
+				7FD24C492CE5F044006FF92F /* SwipTest */,
 			);
 			path = DataShareTest;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 			children = (
 				7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */,
 				7FD24C412CE48A46006FF92F /* PhoneListView.swift */,
+				7FD24C4C2CE5FE38006FF92F /* PhoneEdit */,
 				7FD24C462CE49F6B006FF92F /* Graph */,
 			);
 			path = PhoneData;
@@ -118,6 +124,22 @@
 				7FD24C472CE49F86006FF92F /* GraphView.swift */,
 			);
 			path = Graph;
+			sourceTree = "<group>";
+		};
+		7FD24C492CE5F044006FF92F /* SwipTest */ = {
+			isa = PBXGroup;
+			children = (
+				7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */,
+			);
+			path = SwipTest;
+			sourceTree = "<group>";
+		};
+		7FD24C4C2CE5FE38006FF92F /* PhoneEdit */ = {
+			isa = PBXGroup;
+			children = (
+				7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */,
+			);
+			path = PhoneEdit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,9 +216,11 @@
 				7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */,
 				7FA00A302CE44D71000F695E /* ContentView.swift in Sources */,
 				7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */,
+				7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */,
 				7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */,
 				7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */,
 				7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */,
+				7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */,
 				7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */,
 				7FA00A2E2CE44D71000F695E /* LetUsCountApp.swift in Sources */,
 			);

@@ -9,8 +9,11 @@ import SwiftUI
 
 struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
+    @StateObject var phoneEditManager = PhoneEditManager()
+    @State private var itemToDelect: PhoneModel?
     
     var body: some View {
+        
         HStack {
             List {
                 ForEach (phoneDataManager.phoneModels) { item in
@@ -37,8 +40,33 @@ struct PhoneListView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            
+                            itemToDelect = item
+                            phoneEditManager.delectMessage = true
+                            
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                        
+                    }
                 }
             }
+        }
+        .alert(isPresented: $phoneEditManager.delectMessage) {
+            Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
+                  primaryButton: .default(Text("Delect"), action: {
+                
+                delect()
+                
+            }),
+                  secondaryButton: .cancel(Text("Cancel"), action: {}))
+        }
+    }
+    private func delect() {
+        if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == itemToDelect?.id})  {
+            phoneDataManager.phoneModels.remove(at: index)
         }
     }
 }

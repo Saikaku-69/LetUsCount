@@ -18,7 +18,7 @@ struct MainContentView: View {
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }
-            DataTestView()
+            SwipTestView()
                 .tabItem {
                     Image(systemName: "tray.and.arrow.up")
                 }
