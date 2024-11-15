@@ -23,6 +23,11 @@ class PhoneDataManager:ObservableObject {
         loadData()
     }
     
+//    func addModel(name: String,count: Int) {
+//        let newModel = PhoneModel(name: name,count: count)
+//        phoneModels.append(newModel)
+//    }
+    
     func loadData() {
         phoneModels = [
             PhoneModel(name: "iPhone XR", count: UserDefaults.standard.integer(forKey: "iPhone XR_count")),
