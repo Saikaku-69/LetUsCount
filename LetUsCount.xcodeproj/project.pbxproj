@@ -20,6 +20,7 @@
 		7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C472CE49F86006FF92F /* GraphView.swift */; };
 		7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */; };
 		7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */; };
+		7FD24C502CE60C1F006FF92F /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4F2CE60C1F006FF92F /* SampleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		7FD24C472CE49F86006FF92F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipTestView.swift; sourceTree = "<group>"; };
 		7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEditManager.swift; sourceTree = "<group>"; };
+		7FD24C4F2CE60C1F006FF92F /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */,
+				7FD24C4F2CE60C1F006FF92F /* SampleModel.swift */,
 			);
 			path = SwipTest;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */,
 				7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */,
 				7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */,
+				7FD24C502CE60C1F006FF92F /* SampleModel.swift in Sources */,
 				7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */,
 				7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */,
 				7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */,

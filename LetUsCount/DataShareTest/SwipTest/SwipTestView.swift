@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SwipTestView: View {
-    
-    @State private var sampleArray: [Int] = []
+    @StateObject var sampleModelList = SampleModelList()
     
     @State private var sampleEditText:String = ""
     @State private var checkEdit:Bool = false
@@ -17,13 +16,15 @@ struct SwipTestView: View {
     @State private var itemIndex: Int?
     var body: some View {
         List {
-            ForEach(sampleArray,id: \.self) { item in
-                Text("Phone \(sampleEditText)")
+            ForEach(sampleModelList.sampleModelList.indices,id: \.self) { index in
+                
+                let item = sampleModelList.sampleModelList[index]
+                Text(item.name)
                     .swipeActions {
                         
                         Button(role: .destructive) {
                             
-                            itemIndex = item
+                            itemIndex = index
                             delectMessage = true
                             
                         } label: {
@@ -33,7 +34,7 @@ struct SwipTestView: View {
                         Button(action: {
                             
                             checkEdit = true
-                            
+                            print (item.name)
                         }) {
                             Image(systemName: "pencil")
                         }
@@ -44,19 +45,28 @@ struct SwipTestView: View {
             Button(action: {
                 //添加手机型号
                 //添加配列
+                sampleModelList.addSampleModel(name: sampleEditText)
+//                sampleEditText = ""
+//                print ("行を追加後：\(sampleEditText)")
+                sampleModelList.updateAddSampleModel(at: 0, with: sampleEditText)
             }) {
                 Image(systemName: "plus.circle.fill")
                     .foregroundColor(.green)
             }
             .buttonStyle(PlainButtonStyle())
         }
-        .alert(isPresented: $checkEdit) {
-            Alert(
-                title: Text("ケータイの型"),
-                message: Text("入力してください"),
-                primaryButton: (.default(Text("OK"), action: {})),
-                secondaryButton: .cancel(Text("Cancel"), action: {})
-            )
+        .alert("入力してください",isPresented: $checkEdit) {
+            TextField("Phone",text: $sampleEditText)
+            Button(action: {
+                if let index = itemIndex {
+                    sampleModelList.updateAddSampleModel(at: index, with: sampleEditText)
+                }
+                
+//                sampleEditText = ""
+                print ("入力後：\(sampleEditText)")
+            }, label: {
+                Text("OK")
+            })
         }
         .alert(isPresented: $delectMessage) {
             Alert(
@@ -75,8 +85,8 @@ struct SwipTestView: View {
     }
     private func letDelect() {
         //check array
-        if let index = sampleArray.firstIndex(of: itemIndex!)  {
-            sampleArray.remove(at: index)
+        if let index = itemIndex {
+            sampleModelList.sampleModelList.remove(at: index)
         }
     }
 }
