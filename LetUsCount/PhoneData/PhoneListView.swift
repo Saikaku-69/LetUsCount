@@ -9,8 +9,12 @@ import SwiftUI
 
 struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
+    @StateObject var phoneEditManager = PhoneEditManager()
+    @State private var itemToDelect: PhoneModel?
+    @State private var editText:String = ""
     
     var body: some View {
+        
         HStack {
             List {
                 ForEach (phoneDataManager.phoneModels) { item in
@@ -37,8 +41,58 @@ struct PhoneListView: View {
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            
+                            itemToDelect = item
+                            phoneEditManager.delectMessage = true
+                            
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
                 }
+                
+                Button(action: {
+                    
+                    phoneEditManager.editMessage = true
+                    
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.green)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
             }
+        }
+        .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
+            TextField("名称",text: $editText)
+            Button(action: {
+                print(editText)
+                
+                // 入力したeditTextをphoneModelsのnameに代入する
+                
+                
+                editText = ""
+                print(editText)
+            }) {
+                Text("確定")
+            }
+            
+        }
+        .alert(isPresented: $phoneEditManager.delectMessage) {
+            Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
+                  primaryButton: .default(Text("Delect"), action: {
+                
+                delect()
+                
+            }),
+                  secondaryButton: .cancel(Text("Cancel"), action: {}))
+        }
+    }
+    private func delect() {
+        if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == itemToDelect?.id})  {
+            phoneDataManager.phoneModels.remove(at: index)
         }
     }
 }
