@@ -33,8 +33,8 @@ struct SwipTestView: View {
                         
                         Button(action: {
                             
-                            checkEdit = true
-                            print (item.name)
+//                            checkEdit = true
+                            
                         }) {
                             Image(systemName: "pencil")
                         }
@@ -42,28 +42,37 @@ struct SwipTestView: View {
                     }
             }
             
+            //追加ボタン
             Button(action: {
-                //添加手机型号
-                //添加配列
-                sampleModelList.addSampleModel(name: sampleEditText)
-//                sampleEditText = ""
-//                print ("行を追加後：\(sampleEditText)")
-                sampleModelList.updateAddSampleModel(at: 0, with: sampleEditText)
+                
+                checkEdit = true
+                print(sampleEditText)
+                
             }) {
                 Image(systemName: "plus.circle.fill")
                     .foregroundColor(.green)
             }
             .buttonStyle(PlainButtonStyle())
+            
+            
         }
         .alert("入力してください",isPresented: $checkEdit) {
             TextField("Phone",text: $sampleEditText)
+            //編集ボタン
             Button(action: {
+                
+                //添加配列
+                sampleModelList.addSampleModel(name: sampleEditText)
+                print(sampleEditText)
+                
                 if let index = itemIndex {
                     sampleModelList.updateAddSampleModel(at: index, with: sampleEditText)
+                    print(sampleEditText)
                 }
                 
-//                sampleEditText = ""
-                print ("入力後：\(sampleEditText)")
+                sampleEditText = ""
+                print(sampleEditText)
+                
             }, label: {
                 Text("OK")
             })

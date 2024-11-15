@@ -26,6 +26,5 @@ class SampleModelList:ObservableObject {
     func updateAddSampleModel(at index: Int, with name: String) {
         guard index >= 0 && index < sampleModelList.count else { return }
         sampleModelList[index].name = name
-        print (name)
     }
 }
