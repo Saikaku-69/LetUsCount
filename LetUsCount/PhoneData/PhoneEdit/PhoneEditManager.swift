@@ -11,5 +11,6 @@ import SwiftUI
 class PhoneEditManager: ObservableObject {
     
     @Published var delectMessage:Bool = false
+    @Published var editMessage:Bool = false
     
 }

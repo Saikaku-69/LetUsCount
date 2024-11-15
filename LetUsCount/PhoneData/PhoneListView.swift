@@ -11,6 +11,7 @@ struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
     @StateObject var phoneEditManager = PhoneEditManager()
     @State private var itemToDelect: PhoneModel?
+    @State private var editText:String = ""
     
     var body: some View {
         
@@ -49,10 +50,30 @@ struct PhoneListView: View {
                         } label: {
                             Image(systemName: "trash")
                         }
-                        
                     }
                 }
+                
+                Button(action: {
+                    
+                    phoneEditManager.editMessage = true
+                    
+                }) {
+                    Image(systemName: "plus.circle.fill")
+                        .foregroundColor(.green)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
             }
+        }
+        .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
+            TextField("名称",text: $editText)
+            Button(action: {
+                
+                editText = ""
+            }) {
+                Text("確定")
+            }
+            
         }
         .alert(isPresented: $phoneEditManager.delectMessage) {
             Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
