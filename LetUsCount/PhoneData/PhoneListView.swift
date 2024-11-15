@@ -68,8 +68,13 @@ struct PhoneListView: View {
         .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
             TextField("名称",text: $editText)
             Button(action: {
+                print(editText)
+                
+                // 入力したeditTextをphoneModelsのnameに代入する
+                
                 
                 editText = ""
+                print(editText)
             }) {
                 Text("確定")
             }
