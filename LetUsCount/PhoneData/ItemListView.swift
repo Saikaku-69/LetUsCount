@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PhoneListView: View {
-    @EnvironmentObject var phoneDataManager: PhoneDataManager
+struct ItemListView: View {
+    @EnvironmentObject var phoneDataManager: ItemDataManager
     @StateObject var phoneEditManager = PhoneEditManager()
     @State private var editText:String = ""
     @State private var selectedDate = Date()
@@ -137,6 +137,6 @@ struct PhoneListView: View {
 }
 
 #Preview {
-    PhoneListView()
-        .environmentObject(PhoneDataManager())
+    ItemListView()
+        .environmentObject(ItemDataManager())
 }
