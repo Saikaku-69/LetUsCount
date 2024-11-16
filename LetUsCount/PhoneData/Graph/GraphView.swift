@@ -16,23 +16,24 @@ struct GraphView: View {
                 Rectangle()
                     .fill(.black)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width:30)
-                Text("売上")
+                    .frame(width:15)
+                Text("no idea")
+                    .font(.system(size: 10))
             }
-        HStack {
-            ForEach(phoneDataManager.phoneModels) { item in
-                VStack {
-                    Spacer()
-                    Rectangle()
-                        .fill(.green)
-                        .frame(width: 25,height:CGFloat(Int(item.count)) * 10)
-                    Text(item.name)
+            HStack {
+                ForEach(phoneDataManager.phoneModels) { item in
+                    VStack {
+                        Spacer()
+                        Rectangle()
+                            .fill(.green)
+                            .frame(width: 25,height:CGFloat(Int(item.count)) * 10)
+                        Text(item.name)
+                            .font(.system(size: 10))
+                    }
+                    .frame(height:500)
                 }
-                .frame(height:500)
             }
         }
-    }
-        .border(.red)
     }
 }
 
