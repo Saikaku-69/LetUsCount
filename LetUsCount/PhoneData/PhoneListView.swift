@@ -11,89 +11,94 @@ struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
     @StateObject var phoneEditManager = PhoneEditManager()
     @State private var editText:String = ""
+    @State private var selectedDate = Date()
     
     var body: some View {
-        
-        HStack {
-            List {
-                ForEach (phoneDataManager.phoneModels) { item in
-                    HStack {
-                        Text(item.name)
-                        Spacer()
-                        
-                        Button(action: {
-                            phoneDataManager.phoneIncrement(for: item)
-                        }) {
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.blue)
+        VStack {
+            DatePicker("Select a date", selection: $selectedDate, displayedComponents: .date)
+                .datePickerStyle(GraphicalDatePickerStyle())
+                .padding()
+            HStack {
+                List {
+                    ForEach (phoneDataManager.phoneModels) { item in
+                        HStack {
+                            Text(item.name)
+                            Spacer()
+                            
+                            Button(action: {
+                                phoneDataManager.phoneIncrement(for: item)
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(.blue)
+                            }
+                            .buttonStyle(PlainButtonStyle()) //禁止选择整行
+                            
+                            Text("\(item.count)")
+                                .frame(width: 50)
+                            
+                            Button(action: {
+                                phoneDataManager.phoneDecrement(for: item)
+                            }) {
+                                Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(.red)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle()) //禁止选择整行
-                        
-                        Text("\(item.count)")
-                            .frame(width: 50)
-                        
-                        Button(action: {
-                            phoneDataManager.phoneDecrement(for: item)
-                        }) {
-                            Image(systemName: "minus.circle.fill")
-                                .foregroundColor(.red)
+                        .swipeActions {
+                            Button {
+                                
+                                phoneEditManager.itemToEdit = item
+                                phoneEditManager.delectMessage = true
+                                
+                            } label: {
+                                Image(systemName: "trash")
+                            }
+                            .tint(.red)
+                            
+                            Button(action: {
+                                
+                                phoneEditManager.startEditing(item)
+                                phoneEditManager.resetMessage = true
+                                
+                            }) {
+                                Image(systemName: "pencil")
+                            }
+                            .tint(.blue)
                         }
-                        .buttonStyle(PlainButtonStyle())
                     }
-                    .swipeActions {
-                        Button {
-                            
-                            phoneEditManager.itemToEdit = item
-                            phoneEditManager.delectMessage = true
-                            
-                        } label: {
-                            Image(systemName: "trash")
-                        }
-                        .tint(.red)
+                    
+                    //触发警告来输入文字
+                    Button(action: {
                         
-                        Button(action: {
-                            
-                            phoneEditManager.startEditing(item)
-                            phoneEditManager.resetMessage = true
-                            
-                        }) {
-                            Image(systemName: "pencil")
-                        }
-                        .tint(.blue)
+                        phoneEditManager.editMessage = true
+                        
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.green)
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    
                 }
-                
-                //触发警告来输入文字
+            }
+            .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
+                TextField("名称",text: $editText)
                 Button(action: {
                     
-                    phoneEditManager.editMessage = true
+                    // 入力したeditTextをphoneModelsのnameに代入する
+                    phoneDataManager.addModel(name: editText)
+                    phoneEditManager.editMessage = false
+                    editText = ""
                     
                 }) {
-                    Image(systemName: "plus.circle.fill")
-                        .foregroundColor(.green)
+                    Text("確定")
                 }
-                .buttonStyle(PlainButtonStyle())
+                Button("キャンセル", role: .cancel) {
+                    
+                    phoneEditManager.editMessage = false
+                    editText = ""
+                }
                 
             }
-        }
-        .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
-            TextField("名称",text: $editText)
-            Button(action: {
-                
-                // 入力したeditTextをphoneModelsのnameに代入する
-                phoneDataManager.addModel(name: editText)
-                phoneEditManager.editMessage = false
-                editText = ""
-                
-            }) {
-                Text("確定")
-            }
-            Button("キャンセル", role: .cancel) {
-                
-                phoneEditManager.editMessage = false
-                editText = ""
-            }
-            
         }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
             TextField("名称",text: $phoneEditManager.editingName)
