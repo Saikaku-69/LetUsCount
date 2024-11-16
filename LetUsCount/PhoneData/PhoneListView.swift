@@ -82,12 +82,18 @@ struct PhoneListView: View {
                 
                 // 入力したeditTextをphoneModelsのnameに代入する
                 phoneDataManager.addModel(name: editText)
+                phoneEditManager.editMessage = false
                 editText = ""
-                phoneEditManager.editMessage = true
                 
             }) {
                 Text("確定")
             }
+            Button("キャンセル", role: .cancel) {
+                
+                phoneEditManager.editMessage = false
+                editText = ""
+            }
+            
         }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
             TextField("名称",text: $phoneEditManager.editingName)
@@ -120,6 +126,7 @@ struct PhoneListView: View {
     func delect() {
         if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == phoneEditManager.itemToEdit?.id})  {
             phoneDataManager.phoneModels.remove(at: index)
+            phoneDataManager.saveData()
         }
     }
 }
