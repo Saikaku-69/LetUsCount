@@ -12,6 +12,7 @@ struct PhoneListView: View {
     @StateObject var phoneEditManager = PhoneEditManager()
     @State private var itemToDelect: PhoneModel?
     @State private var editText:String = ""
+    @State private var itemIndex: Int?
     
     var body: some View {
         
@@ -53,6 +54,7 @@ struct PhoneListView: View {
                     }
                 }
                 
+                //触发警告来输入文字
                 Button(action: {
                     
                     phoneEditManager.editMessage = true
@@ -68,13 +70,11 @@ struct PhoneListView: View {
         .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
             TextField("名称",text: $editText)
             Button(action: {
-                print(editText)
                 
                 // 入力したeditTextをphoneModelsのnameに代入する
-                
-                
+                phoneDataManager.addModel(name: editText)
                 editText = ""
-                print(editText)
+                
             }) {
                 Text("確定")
             }
