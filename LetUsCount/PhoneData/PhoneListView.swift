@@ -10,9 +10,7 @@ import SwiftUI
 struct PhoneListView: View {
     @EnvironmentObject var phoneDataManager: PhoneDataManager
     @StateObject var phoneEditManager = PhoneEditManager()
-    @State private var itemToDelect: PhoneModel?
     @State private var editText:String = ""
-    @State private var itemIndex: Int?
     
     var body: some View {
         
@@ -43,14 +41,25 @@ struct PhoneListView: View {
                         .buttonStyle(PlainButtonStyle())
                     }
                     .swipeActions {
-                        Button(role: .destructive) {
+                        Button {
                             
-                            itemToDelect = item
+                            phoneEditManager.itemToEdit = item
                             phoneEditManager.delectMessage = true
                             
                         } label: {
                             Image(systemName: "trash")
                         }
+                        .tint(.red)
+                        
+                        Button(action: {
+                            
+                            phoneEditManager.startEditing(item)
+                            phoneEditManager.resetMessage = true
+                            
+                        }) {
+                            Image(systemName: "pencil")
+                        }
+                        .tint(.blue)
                     }
                 }
                 
@@ -74,24 +83,42 @@ struct PhoneListView: View {
                 // 入力したeditTextをphoneModelsのnameに代入する
                 phoneDataManager.addModel(name: editText)
                 editText = ""
+                phoneEditManager.editMessage = true
                 
             }) {
                 Text("確定")
             }
-            
+        }
+        .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
+            TextField("名称",text: $phoneEditManager.editingName)
+            Button("確定") {
+                if let itemToEdit = phoneEditManager.itemToEdit {
+                    phoneDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName)
+                    phoneEditManager.resetMessage = false
+                    phoneEditManager.itemToEdit = nil
+                    phoneEditManager.editingName = ""
+                }
+            }
+            Button("キャンセル", role: .cancel) {
+                phoneEditManager.resetMessage = false
+                phoneEditManager.itemToEdit = nil
+                phoneEditManager.editingName = ""
+            }
         }
         .alert(isPresented: $phoneEditManager.delectMessage) {
             Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
-                  primaryButton: .default(Text("Delect"), action: {
+                  primaryButton: .destructive(Text("Delect"), action: {
                 
                 delect()
+                phoneEditManager.delectMessage = false
                 
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
         }
     }
-    private func delect() {
-        if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == itemToDelect?.id})  {
+    
+    func delect() {
+        if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == phoneEditManager.itemToEdit?.id})  {
             phoneDataManager.phoneModels.remove(at: index)
         }
     }

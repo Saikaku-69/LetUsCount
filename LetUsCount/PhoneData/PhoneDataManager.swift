@@ -23,13 +23,20 @@ class PhoneDataManager:ObservableObject {
         loadData()
     }
     
-    func updateModel(at index: Int, with name: String) {
+    func updateModel(at index: Int, with name: String, count: Int? = nil) {
         guard index >= 0 && index < phoneModels.count else { return }
+        let oldName = phoneModels[index].name
         phoneModels[index].name = name
+        if let newCount = count {
+            phoneModels[index].count = newCount
+        }
+        if oldName != name {
+            UserDefaults.standard.removeObject(forKey: "\(oldName)_count")
+        }
+        saveData()
     }
     
     func addModel(name: String, count: Int = 0) {
-        let count = UserDefaults.standard.integer(forKey: "\(name)_count")
         let newModel = PhoneModel(name: name, count: count)
         phoneModels.append(newModel)
         saveData()
@@ -49,6 +56,12 @@ class PhoneDataManager:ObservableObject {
         UserDefaults.standard.set(phoneModels.map { $0.name }, forKey: "savedPhoneNames")
         for phone in phoneModels {
             UserDefaults.standard.set(phone.count, forKey: "\(phone.name)_count")
+        }
+    }
+    
+    func updateModelById(id: UUID, newName: String, newCount: Int? = nil) {
+        if let index = phoneModels.firstIndex(where: { $0.id == id }) {
+            updateModel(at: index, with: newName, count: newCount)
         }
     }
     
