@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct LetUsCountApp: App {
-    @StateObject private var phoneDataManager = PhoneDataManager()
+    @StateObject private var phoneDataManager = TaskDataManager()
     
     var body: some Scene {
         WindowGroup {
