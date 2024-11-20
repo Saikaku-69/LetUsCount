@@ -17,7 +17,7 @@ struct PhoneListView: View {
             DatePicker("Select a date", selection: $phoneEditManager.selectedDate, displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
-                
+            
             
             HStack {
                 List {
@@ -108,15 +108,15 @@ struct PhoneListView: View {
 //            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate.startOfDay)
 //            print("Normalized selected date: \(normalizedSelectedDate)")
 //            print("Available keys in taskDataByDate: \(taskDataManager.taskDataByDate.keys)")
-//        
+//            
 //            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
-////            print("Normalized selected date string: \(normalizedSelectedDateString)")
-//
+//            print("Normalized selected date string: \(normalizedSelectedDateString)")
+//            
 //            let availableKeys = taskDataManager.taskDataByDate.keys.map {
 //                DateFormatter.yyyyMMdd.string(from: $0)
 //            }
-////            print("Available keys as strings: \(availableKeys)")
-//
+//            print("Available keys as strings: \(availableKeys)")
+//            
 //            if availableKeys.contains(normalizedSelectedDateString) {
 //                print("Match found!")
 //            } else {
@@ -149,10 +149,10 @@ struct PhoneListView: View {
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
         }
-        .onChange(of: phoneEditManager.selectedDate) {
-            print("Selected date changed to: \(phoneEditManager.selectedDate.startOfDay)")
-            // 这里可以添加任何额外的逻辑，例如重新加载数据等
-        }
+//        .onChange(of: phoneEditManager.selectedDate) {
+//            print("Selected date changed to: \(phoneEditManager.selectedDate.startOfDay)")
+//            // 这里可以添加任何额外的逻辑，例如重新加载数据等
+//        }
     }
     
     func delete() {
