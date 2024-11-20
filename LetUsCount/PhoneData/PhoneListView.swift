@@ -18,16 +18,17 @@ struct PhoneListView: View {
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
             
+            
             HStack {
                 List {
-                    if let tasks = taskDataManager.taskDataByDate[phoneEditManager.selectedDate] {
+                    if let tasks = taskDataManager.taskDataByDate[phoneEditManager.selectedDate.startOfDay] {
                         ForEach (tasks, id: \.id) { item in
                             HStack {
                                 Text(item.name)
                                 Spacer()
                                 
                                 Button(action: {
-                                    taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate)
+                                    taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
                                 }) {
                                     Image(systemName: "plus.circle.fill")
                                         .foregroundColor(.blue)
@@ -38,7 +39,7 @@ struct PhoneListView: View {
                                     .frame(width: 50)
                                 
                                 Button(action: {
-                                    taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate)
+                                    taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
                                 }) {
                                     Image(systemName: "minus.circle.fill")
                                         .foregroundColor(.red)
@@ -67,8 +68,6 @@ struct PhoneListView: View {
                                 .tint(.blue)
                             }
                         }
-                    } else {
-                        Text("No tasks available for this date.")
                     }
                     
                     //触发警告来输入文字
@@ -89,7 +88,7 @@ struct PhoneListView: View {
                 Button(action: {
                     
                     // 入力したeditTextをphoneModelsのnameに代入する
-                    taskDataManager.addModel(name: editText, date: phoneEditManager.selectedDate)
+                    taskDataManager.addModel(name: editText, date: phoneEditManager.selectedDate.startOfDay)
                     phoneEditManager.editMessage = false
                     editText = ""
                     
@@ -104,31 +103,31 @@ struct PhoneListView: View {
                 
             }
         }
-        .onAppear() {
-            let calendar = Calendar.current
-            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate)
+//        .onAppear() {
+//            let calendar = Calendar.current
+//            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate.startOfDay)
 //            print("Normalized selected date: \(normalizedSelectedDate)")
 //            print("Available keys in taskDataByDate: \(taskDataManager.taskDataByDate.keys)")
-        
-            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
-            print("Normalized selected date string: \(normalizedSelectedDateString)")
-
-            let availableKeys = taskDataManager.taskDataByDate.keys.map {
-                DateFormatter.yyyyMMdd.string(from: $0)
-            }
-            print("Available keys as strings: \(availableKeys)")
-
-            if availableKeys.contains(normalizedSelectedDateString) {
-                print("Match found!")
-            } else {
-                print("No match found.")
-            }
-        }
+//            
+//            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
+//            print("Normalized selected date string: \(normalizedSelectedDateString)")
+//            
+//            let availableKeys = taskDataManager.taskDataByDate.keys.map {
+//                DateFormatter.yyyyMMdd.string(from: $0)
+//            }
+//            print("Available keys as strings: \(availableKeys)")
+//            
+//            if availableKeys.contains(normalizedSelectedDateString) {
+//                print("Match found!")
+//            } else {
+//                print("No match found.")
+//            }
+//        }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
             TextField("名称",text: $phoneEditManager.editingName)
             Button("確定") {
                 if let itemToEdit = phoneEditManager.itemToEdit {
-                    taskDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName, date: phoneEditManager.selectedDate)
+                    taskDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName, date: phoneEditManager.selectedDate.startOfDay)
                     phoneEditManager.resetMessage = false
                     phoneEditManager.itemToEdit = nil
                     phoneEditManager.editingName = ""
@@ -150,6 +149,10 @@ struct PhoneListView: View {
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
         }
+//        .onChange(of: phoneEditManager.selectedDate) {
+//            print("Selected date changed to: \(phoneEditManager.selectedDate.startOfDay)")
+//            // 这里可以添加任何额外的逻辑，例如重新加载数据等
+//        }
     }
     
     func delete() {
@@ -157,7 +160,7 @@ struct PhoneListView: View {
             return
         }
         
-        let selectedDate = phoneEditManager.selectedDate
+        let selectedDate = phoneEditManager.selectedDate.startOfDay
         
         if var tasksForDate = taskDataManager.taskDataByDate[selectedDate] {
             tasksForDate.removeAll { $0.id == itemToDelete.id }

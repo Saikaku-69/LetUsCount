@@ -33,14 +33,15 @@ class TaskDataManager:ObservableObject {
     
     func saveData() {
         let encodableData: [String: [TaskModel]] = taskDataByDate.reduce(into: [:]) { result, element in
-            let dateString = DateFormatter.yyyyMMdd.string(from: element.key)
+            let dateString = DateFormatter.yyyyMMdd.string(from: element.key.startOfDay) // 使用 startOfDay 确保没有时间部分
             result[dateString] = element.value
+            print("Data before encoding: \(taskDataByDate)")
         }
-//        print("Data before encoding: \(encodableData)")
+        
         do {
             let encodedData = try JSONEncoder().encode(encodableData)
             UserDefaults.standard.set(encodedData, forKey: "taskDataByDate")
-//            print("Saved data successfully.")
+            print("Saved data successfully.")
         } catch {
             print("Failed to encode data for UserDefaults: \(error.localizedDescription)")
         }
@@ -49,16 +50,18 @@ class TaskDataManager:ObservableObject {
     func loadData() {
         if let savedData = UserDefaults.standard.data(forKey: "taskDataByDate") {
             do {
+                // 解码数据
                 let decodedData = try JSONDecoder().decode([String: [TaskModel]].self, from: savedData)
+                
+                // 将 decodedData 的日期字符串转回 Date，并且使用 startOfDay 进行统一
                 taskDataByDate = decodedData.reduce(into: [:]) { result, element in
-                    if let date = DateFormatter.yyyyMMdd.date(from: element.key) {
-                        
-//                        print("Parsed date: \(date), Original string: \(element.key)")
-                        
+                    if let date = DateFormatter.yyyyMMdd.date(from: element.key)?.startOfDay {
                         result[date] = element.value
+                        print("Decoded data: \(decodedData)")
                     }
                 }
-//                print("Decoded data: \(decodedData)")
+                
+                print("Loaded data successfully: \(taskDataByDate)")
             } catch {
                 print("Failed to decode data from UserDefaults: \(error.localizedDescription)")
             }
@@ -68,12 +71,15 @@ class TaskDataManager:ObservableObject {
     }
     
     func addModel(name: String, date: Date) {
+        let normalizedDate = Calendar.current.startOfDay(for: date) // 规范化日期
         let newModel = TaskModel(name: name, count: 0)
-        if taskDataByDate[date] != nil {
-            taskDataByDate[date]?.append(newModel)
+        
+        if taskDataByDate[normalizedDate] != nil {
+            taskDataByDate[normalizedDate]?.append(newModel)
         } else {
-            taskDataByDate[date] = [newModel]
+            taskDataByDate[normalizedDate] = [newModel]
         }
+        
         saveData()
     }
     
@@ -118,4 +124,10 @@ extension DateFormatter {
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
+}
+extension Date {
+    var startOfDay: Date {
+        let calendar = Calendar.current
+        return calendar.startOfDay(for: self)
+    }
 }
