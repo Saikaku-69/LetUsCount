@@ -31,24 +31,39 @@ class TaskDataManager:ObservableObject {
         loadData()
     }
     
-    func loadData() {
-        if let savedData = UserDefaults.standard.data(forKey: "taskDataByDate"),
-           let decodedData = try? JSONDecoder().decode([String: [TaskModel]].self, from: savedData) {
-            taskDataByDate = decodedData.reduce(into: [:]) { result, element in
-                if let date = DateFormatter.yyyyMMdd.date(from: element.key) {
-                    result[date] = element.value
-                }
-            }
-        }
-    }
-    
     func saveData() {
         let encodableData: [String: [TaskModel]] = taskDataByDate.reduce(into: [:]) { result, element in
             let dateString = DateFormatter.yyyyMMdd.string(from: element.key)
             result[dateString] = element.value
         }
-        if let encodedData = try? JSONEncoder().encode(encodableData) {
+//        print("Data before encoding: \(encodableData)")
+        do {
+            let encodedData = try JSONEncoder().encode(encodableData)
             UserDefaults.standard.set(encodedData, forKey: "taskDataByDate")
+//            print("Saved data successfully.")
+        } catch {
+            print("Failed to encode data for UserDefaults: \(error.localizedDescription)")
+        }
+    }
+    
+    func loadData() {
+        if let savedData = UserDefaults.standard.data(forKey: "taskDataByDate") {
+            do {
+                let decodedData = try JSONDecoder().decode([String: [TaskModel]].self, from: savedData)
+                taskDataByDate = decodedData.reduce(into: [:]) { result, element in
+                    if let date = DateFormatter.yyyyMMdd.date(from: element.key) {
+                        
+//                        print("Parsed date: \(date), Original string: \(element.key)")
+                        
+                        result[date] = element.value
+                    }
+                }
+//                print("Decoded data: \(decodedData)")
+            } catch {
+                print("Failed to decode data from UserDefaults: \(error.localizedDescription)")
+            }
+        } else {
+            print("No data found in UserDefaults.")
         }
     }
     

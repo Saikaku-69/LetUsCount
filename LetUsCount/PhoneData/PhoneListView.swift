@@ -20,51 +20,55 @@ struct PhoneListView: View {
             
             HStack {
                 List {
-                    ForEach (taskDataManager.taskDataByDate[phoneEditManager.selectedDate] ?? [], id: \.id) { item in
-                        HStack {
-                            Text(item.name)
-                            Spacer()
-                            
-                            Button(action: {
-                                taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate)
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(.blue)
+                    if let tasks = taskDataManager.taskDataByDate[phoneEditManager.selectedDate] {
+                        ForEach (tasks, id: \.id) { item in
+                            HStack {
+                                Text(item.name)
+                                Spacer()
+                                
+                                Button(action: {
+                                    taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate)
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(.blue)
+                                }
+                                .buttonStyle(PlainButtonStyle()) //禁止选择整行
+                                
+                                Text("\(item.count)")
+                                    .frame(width: 50)
+                                
+                                Button(action: {
+                                    taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate)
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .buttonStyle(PlainButtonStyle()) //禁止选择整行
-                            
-                            Text("\(item.count)")
-                                .frame(width: 50)
-                            
-                            Button(action: {
-                                taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate)
-                            }) {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.red)
+                            .swipeActions {
+                                Button {
+                                    
+                                    phoneEditManager.itemToEdit = item
+                                    phoneEditManager.delectMessage = true
+                                    
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.red)
+                                
+                                Button(action: {
+                                    
+                                    phoneEditManager.startEditing(item)
+                                    phoneEditManager.resetMessage = true
+                                    
+                                }) {
+                                    Image(systemName: "pencil")
+                                }
+                                .tint(.blue)
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
-                        .swipeActions {
-                            Button {
-                                
-                                phoneEditManager.itemToEdit = item
-                                phoneEditManager.delectMessage = true
-                                
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                            .tint(.red)
-                            
-                            Button(action: {
-                                
-                                phoneEditManager.startEditing(item)
-                                phoneEditManager.resetMessage = true
-                                
-                            }) {
-                                Image(systemName: "pencil")
-                            }
-                            .tint(.blue)
-                        }
+                    } else {
+                        Text("No tasks available for this date.")
                     }
                     
                     //触发警告来输入文字
@@ -98,6 +102,26 @@ struct PhoneListView: View {
                     editText = ""
                 }
                 
+            }
+        }
+        .onAppear() {
+            let calendar = Calendar.current
+            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate)
+//            print("Normalized selected date: \(normalizedSelectedDate)")
+//            print("Available keys in taskDataByDate: \(taskDataManager.taskDataByDate.keys)")
+        
+            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
+            print("Normalized selected date string: \(normalizedSelectedDateString)")
+
+            let availableKeys = taskDataManager.taskDataByDate.keys.map {
+                DateFormatter.yyyyMMdd.string(from: $0)
+            }
+            print("Available keys as strings: \(availableKeys)")
+
+            if availableKeys.contains(normalizedSelectedDateString) {
+                print("Match found!")
+            } else {
+                print("No match found.")
             }
         }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
