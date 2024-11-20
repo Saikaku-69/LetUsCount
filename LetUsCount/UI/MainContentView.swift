@@ -14,7 +14,7 @@ struct MainContentView: View {
                 .tabItem {
                     Image(systemName: "tray.full.fill")
                 }
-            GraphView()
+            GraphView(phoneEditManager: PhoneEditManager())
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }
@@ -28,5 +28,5 @@ struct MainContentView: View {
 
 #Preview {
     MainContentView()
-        .environmentObject(PhoneDataManager())
+        .environmentObject(TaskDataManager())
 }

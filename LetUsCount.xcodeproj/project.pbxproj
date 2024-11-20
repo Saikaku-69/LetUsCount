@@ -14,7 +14,7 @@
 		7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C382CE480CF006FF92F /* SampleData.swift */; };
 		7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3A2CE48139006FF92F /* DataTestView.swift */; };
 		7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3C2CE483D9006FF92F /* AnotherView.swift */; };
-		7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */; };
+		7FD24C402CE48966006FF92F /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */; };
 		7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* PhoneListView.swift */; };
 		7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C442CE49AD8006FF92F /* MainContentView.swift */; };
 		7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C472CE49F86006FF92F /* GraphView.swift */; };
@@ -32,7 +32,7 @@
 		7FD24C382CE480CF006FF92F /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		7FD24C3A2CE48139006FF92F /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		7FD24C3C2CE483D9006FF92F /* AnotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherView.swift; sourceTree = "<group>"; };
-		7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneDataManager.swift; sourceTree = "<group>"; };
+		7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
 		7FD24C412CE48A46006FF92F /* PhoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListView.swift; sourceTree = "<group>"; };
 		7FD24C442CE49AD8006FF92F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		7FD24C472CE49F86006FF92F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		7FD24C3E2CE48908006FF92F /* PhoneData */ = {
 			isa = PBXGroup;
 			children = (
-				7FD24C3F2CE48966006FF92F /* PhoneDataManager.swift */,
+				7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */,
 				7FD24C412CE48A46006FF92F /* PhoneListView.swift */,
 				7FD24C4C2CE5FE38006FF92F /* PhoneEdit */,
 				7FD24C462CE49F6B006FF92F /* Graph */,
@@ -215,7 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FD24C402CE48966006FF92F /* PhoneDataManager.swift in Sources */,
+				7FD24C402CE48966006FF92F /* TaskDataManager.swift in Sources */,
 				7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */,
 				7FA00A302CE44D71000F695E /* ContentView.swift in Sources */,
 				7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */,

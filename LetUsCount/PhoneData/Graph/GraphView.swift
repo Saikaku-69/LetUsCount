@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct GraphView: View {
-    @EnvironmentObject var phoneDataManager: PhoneDataManager
+    @EnvironmentObject var taskDataManager: TaskDataManager
+    @ObservedObject var phoneEditManager: PhoneEditManager
     
     var body: some View {
         VStack {
@@ -21,7 +22,7 @@ struct GraphView: View {
                     .font(.system(size: 10))
             }
             HStack {
-                ForEach(phoneDataManager.phoneModels) { item in
+                ForEach(taskDataManager.taskDataByDate[phoneEditManager.selectedDate] ?? [], id: \.id) { item in
                     VStack {
                         Spacer()
                         Rectangle()
@@ -38,6 +39,6 @@ struct GraphView: View {
 }
 
 #Preview {
-    GraphView()
-        .environmentObject(PhoneDataManager())
+    GraphView(phoneEditManager: PhoneEditManager())
+        .environmentObject(TaskDataManager())
 }
