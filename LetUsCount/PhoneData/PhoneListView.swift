@@ -8,62 +8,65 @@
 import SwiftUI
 
 struct PhoneListView: View {
-    @EnvironmentObject var phoneDataManager: PhoneDataManager
+    @EnvironmentObject var taskDataManager: TaskDataManager
     @StateObject var phoneEditManager = PhoneEditManager()
     @State private var editText:String = ""
-    @State private var selectedDate = Date()
     
     var body: some View {
         VStack {
-            DatePicker("Select a date", selection: $selectedDate, displayedComponents: .date)
+            DatePicker("Select a date", selection: $phoneEditManager.selectedDate, displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
+            
+            
             HStack {
                 List {
-                    ForEach (phoneDataManager.phoneModels) { item in
-                        HStack {
-                            Text(item.name)
-                            Spacer()
-                            
-                            Button(action: {
-                                phoneDataManager.phoneIncrement(for: item)
-                            }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .foregroundColor(.blue)
-                            }
-                            .buttonStyle(PlainButtonStyle()) //禁止选择整行
-                            
-                            Text("\(item.count)")
-                                .frame(width: 50)
-                            
-                            Button(action: {
-                                phoneDataManager.phoneDecrement(for: item)
-                            }) {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.red)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                        .swipeActions {
-                            Button {
+                    if let tasks = taskDataManager.taskDataByDate[phoneEditManager.selectedDate.startOfDay] {
+                        ForEach (tasks, id: \.id) { item in
+                            HStack {
+                                Text(item.name)
+                                Spacer()
                                 
-                                phoneEditManager.itemToEdit = item
-                                phoneEditManager.delectMessage = true
+                                Button(action: {
+                                    taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(.blue)
+                                }
+                                .buttonStyle(PlainButtonStyle()) //禁止选择整行
                                 
-                            } label: {
-                                Image(systemName: "trash")
+                                Text("\(item.count)")
+                                    .frame(width: 50)
+                                
+                                Button(action: {
+                                    taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
-                            .tint(.red)
-                            
-                            Button(action: {
+                            .swipeActions {
+                                Button {
+                                    
+                                    phoneEditManager.itemToEdit = item
+                                    phoneEditManager.delectMessage = true
+                                    
+                                } label: {
+                                    Image(systemName: "trash")
+                                }
+                                .tint(.red)
                                 
-                                phoneEditManager.startEditing(item)
-                                phoneEditManager.resetMessage = true
-                                
-                            }) {
-                                Image(systemName: "pencil")
+                                Button(action: {
+                                    
+                                    phoneEditManager.startEditing(item)
+                                    phoneEditManager.resetMessage = true
+                                    
+                                }) {
+                                    Image(systemName: "pencil")
+                                }
+                                .tint(.blue)
                             }
-                            .tint(.blue)
                         }
                     }
                     
@@ -85,7 +88,7 @@ struct PhoneListView: View {
                 Button(action: {
                     
                     // 入力したeditTextをphoneModelsのnameに代入する
-                    phoneDataManager.addModel(name: editText)
+                    taskDataManager.addModel(name: editText, date: phoneEditManager.selectedDate.startOfDay)
                     phoneEditManager.editMessage = false
                     editText = ""
                     
@@ -100,11 +103,31 @@ struct PhoneListView: View {
                 
             }
         }
+//        .onAppear() {
+//            let calendar = Calendar.current
+//            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate.startOfDay)
+//            print("Normalized selected date: \(normalizedSelectedDate)")
+//            print("Available keys in taskDataByDate: \(taskDataManager.taskDataByDate.keys)")
+//            
+//            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
+//            print("Normalized selected date string: \(normalizedSelectedDateString)")
+//            
+//            let availableKeys = taskDataManager.taskDataByDate.keys.map {
+//                DateFormatter.yyyyMMdd.string(from: $0)
+//            }
+//            print("Available keys as strings: \(availableKeys)")
+//            
+//            if availableKeys.contains(normalizedSelectedDateString) {
+//                print("Match found!")
+//            } else {
+//                print("No match found.")
+//            }
+//        }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
             TextField("名称",text: $phoneEditManager.editingName)
             Button("確定") {
                 if let itemToEdit = phoneEditManager.itemToEdit {
-                    phoneDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName)
+                    taskDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName, date: phoneEditManager.selectedDate.startOfDay)
                     phoneEditManager.resetMessage = false
                     phoneEditManager.itemToEdit = nil
                     phoneEditManager.editingName = ""
@@ -120,23 +143,42 @@ struct PhoneListView: View {
             Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
                   primaryButton: .destructive(Text("Delect"), action: {
                 
-                delect()
+                delete()
                 phoneEditManager.delectMessage = false
                 
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
         }
+//        .onChange(of: phoneEditManager.selectedDate) {
+//            print("Selected date changed to: \(phoneEditManager.selectedDate.startOfDay)")
+//            // 这里可以添加任何额外的逻辑，例如重新加载数据等
+//        }
     }
     
-    func delect() {
-        if let index = phoneDataManager.phoneModels.firstIndex(where: {$0.id == phoneEditManager.itemToEdit?.id})  {
-            phoneDataManager.phoneModels.remove(at: index)
-            phoneDataManager.saveData()
+    func delete() {
+        guard let itemToDelete = phoneEditManager.itemToEdit else {
+            return
+        }
+        
+        let selectedDate = phoneEditManager.selectedDate.startOfDay
+        
+        if var tasksForDate = taskDataManager.taskDataByDate[selectedDate] {
+            tasksForDate.removeAll { $0.id == itemToDelete.id }
+            
+            if tasksForDate.isEmpty {
+                taskDataManager.taskDataByDate.removeValue(forKey: selectedDate)
+            } else {
+                taskDataManager.taskDataByDate[selectedDate] = tasksForDate
+            }
+            
+            taskDataManager.saveData()
+            
+            phoneEditManager.itemToEdit = nil
         }
     }
 }
 
 #Preview {
     PhoneListView()
-        .environmentObject(PhoneDataManager())
+        .environmentObject(TaskDataManager())
 }
