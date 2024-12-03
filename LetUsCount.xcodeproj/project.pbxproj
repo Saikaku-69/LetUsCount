@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F04C75F2CFEA95D0060C0D8 /* GraphSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */; };
 		7FA00A2E2CE44D71000F695E /* LetUsCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */; };
 		7FA00A302CE44D71000F695E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA00A2F2CE44D71000F695E /* ContentView.swift */; };
 		7FA00A322CE44D75000F695E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FA00A312CE44D75000F695E /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSampleView.swift; sourceTree = "<group>"; };
 		7FA00A2A2CE44D71000F695E /* LetUsCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LetUsCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetUsCountApp.swift; sourceTree = "<group>"; };
 		7FA00A2F2CE44D71000F695E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F04C75D2CFEA9300060C0D8 /* GraphTest */ = {
+			isa = PBXGroup;
+			children = (
+				7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */,
+			);
+			path = GraphTest;
+			sourceTree = "<group>";
+		};
 		7FA00A212CE44D71000F695E = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 				7FD24C3A2CE48139006FF92F /* DataTestView.swift */,
 				7FD24C3C2CE483D9006FF92F /* AnotherView.swift */,
 				7FD24C492CE5F044006FF92F /* SwipTest */,
+				7F04C75D2CFEA9300060C0D8 /* GraphTest */,
 			);
 			path = DataShareTest;
 			sourceTree = "<group>";
@@ -106,7 +117,7 @@
 			children = (
 				7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */,
 				7FD24C412CE48A46006FF92F /* TaskListView.swift */,
-				7FD24C4C2CE5FE38006FF92F /* PhoneEdit */,
+				7FD24C4C2CE5FE38006FF92F /* TaskEdit */,
 				7FD24C462CE49F6B006FF92F /* Graph */,
 			);
 			path = TaskData;
@@ -137,12 +148,12 @@
 			path = SwipTest;
 			sourceTree = "<group>";
 		};
-		7FD24C4C2CE5FE38006FF92F /* PhoneEdit */ = {
+		7FD24C4C2CE5FE38006FF92F /* TaskEdit */ = {
 			isa = PBXGroup;
 			children = (
 				7FD24C4D2CE5FE84006FF92F /* TaskEditManager.swift */,
 			);
-			path = PhoneEdit;
+			path = TaskEdit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,6 +238,7 @@
 				7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */,
 				7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */,
 				7FA00A2E2CE44D71000F695E /* LetUsCountApp.swift in Sources */,
+				7F04C75F2CFEA95D0060C0D8 /* GraphSampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

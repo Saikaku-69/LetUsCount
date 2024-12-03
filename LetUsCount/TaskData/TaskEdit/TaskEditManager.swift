@@ -10,6 +10,8 @@ import SwiftUI
 
 class TaskEditManager: ObservableObject {
     
+    static let shared = TaskEditManager()
+    
     @Published var delectMessage:Bool = false
     @Published var editMessage:Bool = false
     @Published var resetMessage:Bool = false

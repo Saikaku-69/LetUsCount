@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TaskListView: View {
     @EnvironmentObject var taskDataManager: TaskDataManager
-    @StateObject var phoneEditManager = TaskEditManager()
+    @StateObject var taskEditManager = TaskEditManager.shared
     @State private var editText:String = ""
     
     var body: some View {
         VStack {
-            DatePicker("Select a date", selection: $phoneEditManager.selectedDate, displayedComponents: .date)
+            DatePicker("Select a date", selection: $taskEditManager.selectedDate, displayedComponents: .date)
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
             
@@ -28,14 +28,14 @@ struct TaskListView: View {
             
             HStack {
                 List {
-                    if let tasks = taskDataManager.taskDataByDate[phoneEditManager.selectedDate.startOfDay] {
+                    if let tasks = taskDataManager.taskDataByDate[taskEditManager.selectedDate.startOfDay] {
                         ForEach (tasks, id: \.id) { item in
                             HStack {
                                 Text(item.name)
                                 Spacer()
                                 
                                 Button(action: {
-                                    taskDataManager.taskIncrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
+                                    taskDataManager.taskIncrement(for: item, date: taskEditManager.selectedDate.startOfDay)
                                 }) {
                                     Image(systemName: "plus.circle.fill")
                                         .foregroundColor(.blue)
@@ -46,7 +46,7 @@ struct TaskListView: View {
                                     .frame(width: 50)
                                 
                                 Button(action: {
-                                    taskDataManager.taskDecrement(for: item, date: phoneEditManager.selectedDate.startOfDay)
+                                    taskDataManager.taskDecrement(for: item, date: taskEditManager.selectedDate.startOfDay)
                                 }) {
                                     Image(systemName: "minus.circle.fill")
                                         .foregroundColor(.red)
@@ -56,8 +56,8 @@ struct TaskListView: View {
                             .swipeActions {
                                 Button {
                                     
-                                    phoneEditManager.itemToEdit = item
-                                    phoneEditManager.delectMessage = true
+                                    taskEditManager.itemToEdit = item
+                                    taskEditManager.delectMessage = true
                                     
                                 } label: {
                                     Image(systemName: "trash")
@@ -66,8 +66,8 @@ struct TaskListView: View {
                                 
                                 Button(action: {
                                     
-                                    phoneEditManager.startEditing(item)
-                                    phoneEditManager.resetMessage = true
+                                    taskEditManager.startEditing(item)
+                                    taskEditManager.resetMessage = true
                                     
                                 }) {
                                     Image(systemName: "pencil")
@@ -80,7 +80,7 @@ struct TaskListView: View {
                     //触发警告来输入文字
                     Button(action: {
                         
-                        phoneEditManager.editMessage = true
+                        taskEditManager.editMessage = true
                         
                     }) {
                         Image(systemName: "plus.circle.fill")
@@ -90,13 +90,13 @@ struct TaskListView: View {
                     
                 }
             }
-            .alert("入力してください", isPresented: $phoneEditManager.editMessage) {
+            .alert("入力してください", isPresented: $taskEditManager.editMessage) {
                 TextField("名称",text: $editText)
                 Button(action: {
                     
                     // 入力したeditTextをphoneModelsのnameに代入する
-                    taskDataManager.addModel(name: editText, date: phoneEditManager.selectedDate.startOfDay)
-                    phoneEditManager.editMessage = false
+                    taskDataManager.addModel(name: editText, date: taskEditManager.selectedDate.startOfDay)
+                    taskEditManager.editMessage = false
                     editText = ""
                     
                 }) {
@@ -104,34 +104,34 @@ struct TaskListView: View {
                 }
                 Button("キャンセル", role: .cancel) {
                     
-                    phoneEditManager.editMessage = false
+                    taskEditManager.editMessage = false
                     editText = ""
                 }
                 
             }
         }
-        .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
-            TextField("名称",text: $phoneEditManager.editingName)
+        .alert("修正してください", isPresented: $taskEditManager.resetMessage) {
+            TextField("名称",text: $taskEditManager.editingName)
             Button("確定") {
-                if let itemToEdit = phoneEditManager.itemToEdit {
-                    taskDataManager.updateModelById(id: itemToEdit.id, newName: phoneEditManager.editingName, date: phoneEditManager.selectedDate.startOfDay)
-                    phoneEditManager.resetMessage = false
-                    phoneEditManager.itemToEdit = nil
-                    phoneEditManager.editingName = ""
+                if let itemToEdit = taskEditManager.itemToEdit {
+                    taskDataManager.updateModelById(id: itemToEdit.id, newName: taskEditManager.editingName, date: taskEditManager.selectedDate.startOfDay)
+                    taskEditManager.resetMessage = false
+                    taskEditManager.itemToEdit = nil
+                    taskEditManager.editingName = ""
                 }
             }
             Button("キャンセル", role: .cancel) {
-                phoneEditManager.resetMessage = false
-                phoneEditManager.itemToEdit = nil
-                phoneEditManager.editingName = ""
+                taskEditManager.resetMessage = false
+                taskEditManager.itemToEdit = nil
+                taskEditManager.editingName = ""
             }
         }
-        .alert(isPresented: $phoneEditManager.delectMessage) {
+        .alert(isPresented: $taskEditManager.delectMessage) {
             Alert(title: Text("警告"), message: Text("削除でよろしいですか？"),
                   primaryButton: .destructive(Text("Delect"), action: {
                 
                 delete()
-                phoneEditManager.delectMessage = false
+                taskEditManager.delectMessage = false
                 
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
@@ -139,11 +139,11 @@ struct TaskListView: View {
     }
     
     func delete() {
-        guard let itemToDelete = phoneEditManager.itemToEdit else {
+        guard let itemToDelete = taskEditManager.itemToEdit else {
             return
         }
         
-        let selectedDate = phoneEditManager.selectedDate.startOfDay
+        let selectedDate = taskEditManager.selectedDate.startOfDay
         
         if var tasksForDate = taskDataManager.taskDataByDate[selectedDate] {
             tasksForDate.removeAll { $0.id == itemToDelete.id }
@@ -156,7 +156,7 @@ struct TaskListView: View {
             
             taskDataManager.saveData()
             
-            phoneEditManager.itemToEdit = nil
+            taskEditManager.itemToEdit = nil
         }
     }
 }

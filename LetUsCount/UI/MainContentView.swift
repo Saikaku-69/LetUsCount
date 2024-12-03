@@ -14,14 +14,14 @@ struct MainContentView: View {
                 .tabItem {
                     Image(systemName: "tray.full.fill")
                 }
-            GraphView(taskEditManager: TaskEditManager())
+            GraphView()
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }
-            SwipTestView()
-                .tabItem {
-                    Image(systemName: "tray.and.arrow.up")
-                }
+//            GraphSampleView()
+//                .tabItem {
+//                    Image(systemName: "tray.and.arrow.up")
+//                }
         }
     }
 }
