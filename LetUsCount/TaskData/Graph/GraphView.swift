@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GraphView: View {
     @EnvironmentObject var taskDataManager: TaskDataManager
-    @ObservedObject var phoneEditManager: PhoneEditManager
+    @ObservedObject var taskEditManager: TaskEditManager
     
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct GraphView: View {
                     .font(.system(size: 10))
             }
             HStack {
-                ForEach(taskDataManager.taskDataByDate[phoneEditManager.selectedDate] ?? [], id: \.id) { item in
+                ForEach(taskDataManager.taskDataByDate[taskEditManager.selectedDate] ?? [], id: \.id) { item in
                     VStack {
                         Spacer()
                         Rectangle()
@@ -39,6 +39,6 @@ struct GraphView: View {
 }
 
 #Preview {
-    GraphView(phoneEditManager: PhoneEditManager())
+    GraphView(taskEditManager: TaskEditManager())
         .environmentObject(TaskDataManager())
 }

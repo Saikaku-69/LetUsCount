@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class PhoneEditManager: ObservableObject {
+class TaskEditManager: ObservableObject {
     
     @Published var delectMessage:Bool = false
     @Published var editMessage:Bool = false

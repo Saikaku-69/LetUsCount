@@ -10,11 +10,11 @@ import SwiftUI
 struct MainContentView: View {
     var body: some View {
         TabView {
-            PhoneListView()
+            TaskListView()
                 .tabItem {
                     Image(systemName: "tray.full.fill")
                 }
-            GraphView(phoneEditManager: PhoneEditManager())
+            GraphView(taskEditManager: TaskEditManager())
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }

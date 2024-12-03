@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct PhoneListView: View {
+struct TaskListView: View {
     @EnvironmentObject var taskDataManager: TaskDataManager
-    @StateObject var phoneEditManager = PhoneEditManager()
+    @StateObject var phoneEditManager = TaskEditManager()
     @State private var editText:String = ""
     
     var body: some View {
@@ -18,6 +18,13 @@ struct PhoneListView: View {
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .padding()
             
+            
+            HStack {
+                Image(systemName: "list.bullet.clipboard.fill")
+                Text("買い物リスト")
+            }
+            .font(.system(size:30))
+            .fontWeight(.bold)
             
             HStack {
                 List {
@@ -103,26 +110,6 @@ struct PhoneListView: View {
                 
             }
         }
-//        .onAppear() {
-//            let calendar = Calendar.current
-//            let normalizedSelectedDate = calendar.startOfDay(for: phoneEditManager.selectedDate.startOfDay)
-//            print("Normalized selected date: \(normalizedSelectedDate)")
-//            print("Available keys in taskDataByDate: \(taskDataManager.taskDataByDate.keys)")
-//            
-//            let normalizedSelectedDateString = DateFormatter.yyyyMMdd.string(from: normalizedSelectedDate)
-//            print("Normalized selected date string: \(normalizedSelectedDateString)")
-//            
-//            let availableKeys = taskDataManager.taskDataByDate.keys.map {
-//                DateFormatter.yyyyMMdd.string(from: $0)
-//            }
-//            print("Available keys as strings: \(availableKeys)")
-//            
-//            if availableKeys.contains(normalizedSelectedDateString) {
-//                print("Match found!")
-//            } else {
-//                print("No match found.")
-//            }
-//        }
         .alert("修正してください", isPresented: $phoneEditManager.resetMessage) {
             TextField("名称",text: $phoneEditManager.editingName)
             Button("確定") {
@@ -149,10 +136,6 @@ struct PhoneListView: View {
             }),
                   secondaryButton: .cancel(Text("Cancel"), action: {}))
         }
-//        .onChange(of: phoneEditManager.selectedDate) {
-//            print("Selected date changed to: \(phoneEditManager.selectedDate.startOfDay)")
-//            // 这里可以添加任何额外的逻辑，例如重新加载数据等
-//        }
     }
     
     func delete() {
@@ -179,6 +162,6 @@ struct PhoneListView: View {
 }
 
 #Preview {
-    PhoneListView()
+    TaskListView()
         .environmentObject(TaskDataManager())
 }
