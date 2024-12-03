@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Charts
 
 struct GraphView: View {
+    
     @EnvironmentObject var taskDataManager: TaskDataManager
-    @ObservedObject var taskEditManager: TaskEditManager
+    @ObservedObject var taskEditManager = TaskEditManager.shared
     
     var body: some View {
         VStack {
@@ -18,20 +20,17 @@ struct GraphView: View {
                     .fill(.black)
                     .aspectRatio(contentMode: .fit)
                     .frame(width:15)
-                Text("no idea")
+                Text("物リスト")
                     .font(.system(size: 10))
             }
-            HStack {
-                ForEach(taskDataManager.taskDataByDate[taskEditManager.selectedDate] ?? [], id: \.id) { item in
-                    VStack {
-                        Spacer()
-                        Rectangle()
-                            .fill(.green)
-                            .frame(width: 25,height:CGFloat(Int(item.count)) * 10)
-                        Text(item.name)
-                            .font(.system(size: 10))
-                    }
-                    .frame(height:500)
+            if let tasks = taskDataManager.taskDataByDate[taskEditManager.selectedDate.startOfDay] {
+                Chart(tasks) { item in
+                    BarMark(x: .value("数量", item.name),
+                            y: .value("Name", item.count),
+                            width: .fixed(20))
+                }
+                .chartXAxis {
+                    AxisMarks(values: .automatic(desiredCount: 5))
                 }
             }
         }
@@ -39,6 +38,6 @@ struct GraphView: View {
 }
 
 #Preview {
-    GraphView(taskEditManager: TaskEditManager())
+    GraphView()
         .environmentObject(TaskDataManager())
 }
