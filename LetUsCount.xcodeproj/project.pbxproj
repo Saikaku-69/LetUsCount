@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F04C75F2CFEA95D0060C0D8 /* GraphSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */; };
 		7FA00A2E2CE44D71000F695E /* LetUsCountApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */; };
 		7FA00A302CE44D71000F695E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA00A2F2CE44D71000F695E /* ContentView.swift */; };
 		7FA00A322CE44D75000F695E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FA00A312CE44D75000F695E /* Assets.xcassets */; };
@@ -15,15 +16,16 @@
 		7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3A2CE48139006FF92F /* DataTestView.swift */; };
 		7FD24C3D2CE483D9006FF92F /* AnotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3C2CE483D9006FF92F /* AnotherView.swift */; };
 		7FD24C402CE48966006FF92F /* TaskDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */; };
-		7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* PhoneListView.swift */; };
+		7FD24C422CE48A46006FF92F /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C412CE48A46006FF92F /* TaskListView.swift */; };
 		7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C442CE49AD8006FF92F /* MainContentView.swift */; };
 		7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C472CE49F86006FF92F /* GraphView.swift */; };
 		7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */; };
-		7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */; };
+		7FD24C4E2CE5FE84006FF92F /* TaskEditManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4D2CE5FE84006FF92F /* TaskEditManager.swift */; };
 		7FD24C502CE60C1F006FF92F /* SampleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD24C4F2CE60C1F006FF92F /* SampleModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSampleView.swift; sourceTree = "<group>"; };
 		7FA00A2A2CE44D71000F695E /* LetUsCount.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LetUsCount.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetUsCountApp.swift; sourceTree = "<group>"; };
 		7FA00A2F2CE44D71000F695E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,11 +35,11 @@
 		7FD24C3A2CE48139006FF92F /* DataTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTestView.swift; sourceTree = "<group>"; };
 		7FD24C3C2CE483D9006FF92F /* AnotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnotherView.swift; sourceTree = "<group>"; };
 		7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataManager.swift; sourceTree = "<group>"; };
-		7FD24C412CE48A46006FF92F /* PhoneListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneListView.swift; sourceTree = "<group>"; };
+		7FD24C412CE48A46006FF92F /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		7FD24C442CE49AD8006FF92F /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
 		7FD24C472CE49F86006FF92F /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		7FD24C4A2CE5F060006FF92F /* SwipTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipTestView.swift; sourceTree = "<group>"; };
-		7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneEditManager.swift; sourceTree = "<group>"; };
+		7FD24C4D2CE5FE84006FF92F /* TaskEditManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditManager.swift; sourceTree = "<group>"; };
 		7FD24C4F2CE60C1F006FF92F /* SampleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F04C75D2CFEA9300060C0D8 /* GraphTest */ = {
+			isa = PBXGroup;
+			children = (
+				7F04C75E2CFEA95D0060C0D8 /* GraphSampleView.swift */,
+			);
+			path = GraphTest;
+			sourceTree = "<group>";
+		};
 		7FA00A212CE44D71000F695E = {
 			isa = PBXGroup;
 			children = (
@@ -74,7 +84,7 @@
 				7FA00A2D2CE44D71000F695E /* LetUsCountApp.swift */,
 				7FA00A2F2CE44D71000F695E /* ContentView.swift */,
 				7FD24C372CE480B8006FF92F /* DataShareTest */,
-				7FD24C3E2CE48908006FF92F /* PhoneData */,
+				7FD24C3E2CE48908006FF92F /* TaskData */,
 				7FD24C432CE49A99006FF92F /* UI */,
 				7FA00A312CE44D75000F695E /* Assets.xcassets */,
 				7FA00A332CE44D75000F695E /* Preview Content */,
@@ -97,19 +107,20 @@
 				7FD24C3A2CE48139006FF92F /* DataTestView.swift */,
 				7FD24C3C2CE483D9006FF92F /* AnotherView.swift */,
 				7FD24C492CE5F044006FF92F /* SwipTest */,
+				7F04C75D2CFEA9300060C0D8 /* GraphTest */,
 			);
 			path = DataShareTest;
 			sourceTree = "<group>";
 		};
-		7FD24C3E2CE48908006FF92F /* PhoneData */ = {
+		7FD24C3E2CE48908006FF92F /* TaskData */ = {
 			isa = PBXGroup;
 			children = (
 				7FD24C3F2CE48966006FF92F /* TaskDataManager.swift */,
-				7FD24C412CE48A46006FF92F /* PhoneListView.swift */,
-				7FD24C4C2CE5FE38006FF92F /* PhoneEdit */,
+				7FD24C412CE48A46006FF92F /* TaskListView.swift */,
+				7FD24C4C2CE5FE38006FF92F /* TaskEdit */,
 				7FD24C462CE49F6B006FF92F /* Graph */,
 			);
-			path = PhoneData;
+			path = TaskData;
 			sourceTree = "<group>";
 		};
 		7FD24C432CE49A99006FF92F /* UI */ = {
@@ -137,12 +148,12 @@
 			path = SwipTest;
 			sourceTree = "<group>";
 		};
-		7FD24C4C2CE5FE38006FF92F /* PhoneEdit */ = {
+		7FD24C4C2CE5FE38006FF92F /* TaskEdit */ = {
 			isa = PBXGroup;
 			children = (
-				7FD24C4D2CE5FE84006FF92F /* PhoneEditManager.swift */,
+				7FD24C4D2CE5FE84006FF92F /* TaskEditManager.swift */,
 			);
-			path = PhoneEdit;
+			path = TaskEdit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,10 +227,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD24C402CE48966006FF92F /* TaskDataManager.swift in Sources */,
-				7FD24C422CE48A46006FF92F /* PhoneListView.swift in Sources */,
+				7FD24C422CE48A46006FF92F /* TaskListView.swift in Sources */,
 				7FA00A302CE44D71000F695E /* ContentView.swift in Sources */,
 				7FD24C482CE49F86006FF92F /* GraphView.swift in Sources */,
-				7FD24C4E2CE5FE84006FF92F /* PhoneEditManager.swift in Sources */,
+				7FD24C4E2CE5FE84006FF92F /* TaskEditManager.swift in Sources */,
 				7FD24C452CE49AD8006FF92F /* MainContentView.swift in Sources */,
 				7FD24C392CE480CF006FF92F /* SampleData.swift in Sources */,
 				7FD24C502CE60C1F006FF92F /* SampleModel.swift in Sources */,
@@ -227,6 +238,7 @@
 				7FD24C4B2CE5F060006FF92F /* SwipTestView.swift in Sources */,
 				7FD24C3B2CE48139006FF92F /* DataTestView.swift in Sources */,
 				7FA00A2E2CE44D71000F695E /* LetUsCountApp.swift in Sources */,
+				7F04C75F2CFEA95D0060C0D8 /* GraphSampleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
