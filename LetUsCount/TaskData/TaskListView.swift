@@ -11,7 +11,6 @@ struct TaskListView: View {
     @EnvironmentObject var taskDataManager: TaskDataManager
     @StateObject var taskEditManager = TaskEditManager.shared
     @State private var editText:String = ""
-    
     var body: some View {
         VStack {
             DatePicker("Select a date", selection: $taskEditManager.selectedDate, displayedComponents: .date)
@@ -20,8 +19,20 @@ struct TaskListView: View {
             
             
             HStack {
-                Image(systemName: "list.bullet.clipboard.fill")
+                Spacer()
+                Image(systemName: "list.bullet.clipboard")
                 Text("買い物リスト")
+                
+                Spacer()
+                Button(action: {
+                    //リセットボタン
+                    deleteOfDay()
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .font(.system(size:15))
+                }
+                .padding(.trailing)
             }
             .font(.system(size:30))
             .fontWeight(.bold)
@@ -159,6 +170,11 @@ struct TaskListView: View {
             
             taskEditManager.itemToEdit = nil
         }
+    }
+    func deleteOfDay() {
+        let selectedDate = taskEditManager.selectedDate.startOfDay
+        taskDataManager.taskDataByDate.removeValue(forKey: selectedDate)
+        taskDataManager.saveData()
     }
 }
 
