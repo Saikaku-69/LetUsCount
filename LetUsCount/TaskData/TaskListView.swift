@@ -35,21 +35,22 @@ struct TaskListView: View {
                                 Spacer()
                                 
                                 Button(action: {
-                                    taskDataManager.taskIncrement(for: item, date: taskEditManager.selectedDate.startOfDay)
+                                    taskDataManager.taskDecrement(for: item, date: taskEditManager.selectedDate.startOfDay)
                                 }) {
-                                    Image(systemName: "plus.circle.fill")
-                                        .foregroundColor(.blue)
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
                                 }
                                 .buttonStyle(PlainButtonStyle()) //禁止选择整行
                                 
                                 Text("\(item.count)")
                                     .frame(width: 50)
                                 
+                                
                                 Button(action: {
-                                    taskDataManager.taskDecrement(for: item, date: taskEditManager.selectedDate.startOfDay)
+                                    taskDataManager.taskIncrement(for: item, date: taskEditManager.selectedDate.startOfDay)
                                 }) {
-                                    Image(systemName: "minus.circle.fill")
-                                        .foregroundColor(.red)
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(.blue)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
