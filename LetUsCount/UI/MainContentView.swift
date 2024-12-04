@@ -10,18 +10,18 @@ import SwiftUI
 struct MainContentView: View {
     var body: some View {
         TabView {
-            PhoneListView()
+            TaskListView()
                 .tabItem {
                     Image(systemName: "tray.full.fill")
                 }
-            GraphView(phoneEditManager: PhoneEditManager())
+            GraphView()
                 .tabItem {
                     Image(systemName: "chart.bar.xaxis")
                 }
-            SwipTestView()
-                .tabItem {
-                    Image(systemName: "tray.and.arrow.up")
-                }
+//            GraphSampleView()
+//                .tabItem {
+//                    Image(systemName: "tray.and.arrow.up")
+//                }
         }
     }
 }

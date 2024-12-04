@@ -8,7 +8,9 @@
 import Foundation
 import SwiftUI
 
-class PhoneEditManager: ObservableObject {
+class TaskEditManager: ObservableObject {
+    
+    static let shared = TaskEditManager()
     
     @Published var delectMessage:Bool = false
     @Published var editMessage:Bool = false
